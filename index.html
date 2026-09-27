@@ -108,6 +108,12 @@
   .prova p b{color:var(--ink); font-weight:600;}
   .howto{padding-left:6px; margin:0;}
   .howto span{display:inline-block; font-family:var(--mono); font-size:11.5px; color:var(--muted); border:1px dashed var(--line); border-radius:8px; padding:4px 8px; margin:2px 4px 0 0;}
+  ul.fmt{list-style:none; margin:12px 0 0; padding-left:6px;}
+  ul.fmt li{position:relative; padding-left:18px; margin:7px 0; color:var(--muted); font-size:14px;}
+  ul.fmt li::before{content:""; position:absolute; left:2px; top:9px; width:5px; height:5px; border-radius:50%; background:var(--pc,var(--accent));}
+  ul.fmt li b{color:var(--ink); font-weight:600;}
+  .prova .note{margin:13px 6px 2px; padding:11px 13px; background:var(--surface-2); border-radius:11px; font-size:13.5px; color:var(--muted); border-left:3px solid var(--pc,var(--accent)); line-height:1.5;}
+  .prova .note b{color:var(--ink); font-weight:600;}
 
   .tablecard{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:6px 4px; box-shadow:0 1px 2px var(--shadow); overflow-x:auto;}
   table{border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums;}
@@ -224,18 +230,33 @@
       <div class="provas">
         <article class="prova" style="--pc:var(--accent)">
           <div class="hd"><h3>Street</h3><span class="tagline">criatividade técnica</span></div>
-          <p>Disputa individual e julgada por nota, onde o estilo pesa tanto quanto o acerto. Cada atleta monta a própria linha na pista. A final combina a melhor <b>run</b> às duas melhores tentativas de <b>best trick</b>.</p>
-          <p class="howto"><b>Nota:</b> <span>melhor run</span><span>+ 2 melhores best tricks</span><span>até 300</span></p>
+          <p>A prova da <b>invenção</b>. Ninguém desce ao mesmo tempo: cada atleta entra sozinho no parque e monta a própria linha entre escadas, corrimãos, rampas e obstáculos. É onde dois competidores usam a mesma pista e parecem esportes diferentes — um acha a linha perfeita, o outro usa o obstáculo de um jeito que ninguém projetou pra ser usado.</p>
+          <ul class="fmt">
+            <li><b>Classificatória:</b> 12 atletas, 2 runs livres de 60s (vale a melhor). Os 6 melhores avançam.</li>
+            <li><b>Final:</b> 6 atletas, 2 runs de 60s + 4 tentativas de <b>best trick</b> — uma manobra única e dificílima; tentativa que erra vale zero.</li>
+            <li><b>Nota:</b> a melhor run + os 2 melhores best tricks, cada um de 0 a 100, somando até <b>300</b>.</li>
+          </ul>
+          <div class="note"><b>Onde mora a tensão:</b> no best trick o placar muda a cada tentativa. O atleta chega à última já sabendo o número exato que precisa cravar pra assumir a liderança.</div>
         </article>
         <article class="prova" style="--pc:var(--good)">
           <div class="hd"><h3>Race</h3><span class="tagline">velocidade e posição</span></div>
-          <p>Corrida de descida, sem nota técnica, disputada em baterias eliminatórias até a final de seis. Percurso com curvas, túneis, saltos e caminhos alternativos. <b>Vence quem cruza a linha primeiro.</b></p>
-          <p class="howto"><b>Resultado:</b> <span>ordem de chegada</span><span>define a colocação</span></p>
+          <p>A prova mais simples de entender e a mais cinematográfica de assistir: sem estilo, sem nota, sem manobra bonita. <b>Cruzou a linha primeiro, ganhou.</b> Descida em alta velocidade por túneis, saltos e curvas — quase sempre à noite, com os rastros de LED dos boards riscando o escuro.</p>
+          <ul class="fmt">
+            <li><b>Baterias:</b> 12 atletas (2 por time) em 2 grupos de 6. Os 3 primeiros de cada avançam.</li>
+            <li><b>Final:</b> 6 atletas no traçado principal. Quem venceu a bateria larga na frente — ganhar a classificatória vale vantagem real.</li>
+            <li><b>Contato:</b> encostão acidental faz parte de descer junto; derrubar de propósito é <b>falta</b>.</li>
+          </ul>
+          <div class="note"><b>O que faz a pista virar jogo:</b> em vários pontos ela se divide — uma linha curta e violenta contra uma longa e veloz — e há atalhos de risco que cortam caminho em troca de um salto perigoso. Nenhuma escolha é a certa. As rotas se reencontram, e é aí que nascem as ultrapassagens.</div>
         </article>
         <article class="prova" style="--pc:var(--hot)">
           <div class="hd"><h3>Hybrid</h3><span class="tagline">a prova rainha</span></div>
-          <p>A prova mais prestigiosa, e a única que reúne as duas anteriores. <b>Os 12 atletas descem juntos</b>, mas cruzar a linha primeiro não garante a vitória: cada um também é avaliado pela técnica e pela linha escolhida. O equilíbrio entre risco e velocidade decide tudo.</p>
-          <p class="howto"><b>Nota até 100:</b> <span>técnica 35</span><span>execução 20</span><span>linha 20</span><span>corrida 25</span></p>
+          <p>O evento principal de cada etapa e a única prova que funde as outras duas — aqui não dá pra se esconder. No Street você brilha sem ser rápido; na Race você vence sem uma manobra bonita; na Hybrid precisa das duas coisas ao mesmo tempo: <b>chegar rápido E acumular pontos no caminho.</b></p>
+          <ul class="fmt">
+            <li><b>Largada:</b> os <b>12 descem de uma vez</b> — uma parede de atletas numa descida única e massiva, não em baterias.</li>
+            <li><b>A pista:</b> alterna trechos velozes com zonas técnicas, onde cada atleta decide quanto risco compra por quanta nota.</li>
+            <li><b>Nota (0 a 100):</b> técnica 35 · execução 20 · criatividade e linha 20 · posição de chegada 25.</li>
+          </ul>
+          <div class="note"><b>A regra que decide tudo:</b> cruzar a linha primeiro <b>não</b> garante a vitória. Dá pra chegar em 1º pegando sempre a rota fácil e perder pra quem chegou dois segundos depois numa linha absurda. Velocidade sem risco não vence; risco sem velocidade também não.</div>
         </article>
       </div>
 
@@ -256,19 +277,19 @@
 
       <h2 class="sec-h">Os seis times</h2>
       <div class="teams">
-        <div class="team"><div class="sym">🌹</div><div><div class="n">Pandora</div><div class="cap">Capitão · Adam</div><div class="d">Atual campeã por Equipes. O maior orçamento do circuito, montado com estrelas contratadas no mundo inteiro. Vermelho e preto.</div></div></div>
-        <div class="team"><div class="sym">🌊</div><div><div class="n">Wave</div><div class="cap">Capitão · Langa "Snow" Hasegawa</div><div class="d">Construído em torno do maior nome da Hybrid. Em reconstrução: a missão é transformar talento individual em resultado de equipe. Azul e branco.</div></div></div>
-        <div class="team"><div class="sym">💎</div><div><div class="n">Prism</div><div class="cap">Capitão · Cherry (Kaoru)</div><div class="d">Referência em precisão e rigor técnico, com forte presença no Street. Rosa e branco.</div></div></div>
-        <div class="team"><div class="sym">🐍</div><div><div class="n">Rush</div><div class="cap">Capitão · Joe (Kojiro)</div><div class="d">Um dos elencos mais físicos da liga — potência e velocidade em primeiro plano. Verde e preto.</div></div></div>
-        <div class="team"><div class="sym">🦇</div><div><div class="n">Afterdark</div><div class="cap">Capitão · Shadow</div><div class="d">Identidade teatral e imponente, forte no Street e resistente na Race. Roxo e preto.</div></div></div>
-        <div class="team"><div class="sym">👾</div><div><div class="n">Arcade</div><div class="cap">Capitão · Genji</div><div class="d">O time formador do circuito: revela jovens talentos e conquista o público como azarão. Dourado e preto.</div></div></div>
+        <div class="team"><div class="sym">🌹</div><div><div class="n">Pandora</div><div class="cap">Capitão · Adam</div><div class="d">Atual campeã da S-League, a Pandora reúne alguns dos maiores talentos do circuito nacional e internacional. Com alto investimento, elenco de elite e uma cultura voltada para resultados, a equipe chega a cada temporada com a mesma expectativa: permanecer no topo.</div></div></div>
+        <div class="team"><div class="sym">🌊</div><div><div class="n">Wave</div><div class="cap">Capitão · Snow</div><div class="d">A Wave combina velocidade, técnica e versatilidade em um elenco capaz de competir em diferentes modalidades. Conhecida por grandes desempenhos individuais, a equipe entra na nova temporada em busca de maior consistência e força coletiva.</div></div></div>
+        <div class="team"><div class="sym">💎</div><div><div class="n">Prism</div><div class="cap">Capitão · Cherry</div><div class="d">Precisão, estratégia e inovação definem a Prism. A equipe aposta em preparação técnica rigorosa e leitura de pista para transformar pequenos detalhes em vantagem, mantendo um dos estilos mais controlados e refinados da S-League.</div></div></div>
+        <div class="team"><div class="sym">🐍</div><div><div class="n">Rush</div><div class="cap">Capitão · Joe</div><div class="d">Potência, intensidade e coragem fazem parte da identidade da Rush. É uma equipe agressiva na pista, que prefere assumir riscos e disputar espaço a esperar pelo erro dos adversários.</div></div></div>
+        <div class="team"><div class="sym">🦇</div><div><div class="n">Afterdark</div><div class="cap">Capitão · Shadow</div><div class="d">A Afterdark transformou competição em espetáculo. Com uma identidade visual marcante e um estilo ousado e imprevisível, a equipe é conhecida por performances que chamam atenção antes, durante e depois da largada.</div></div></div>
+        <div class="team"><div class="sym">👾</div><div><div class="n">Arcade</div><div class="cap">Capitão · Genji</div><div class="d">A Arcade construiu sua reputação apostando em desenvolvimento, experiência e trabalho coletivo. Sem depender de grandes contratações, a equipe valoriza talentos em crescimento e costuma surpreender adversários quando menos se espera.</div></div></div>
       </div>
 
-      <h2 class="sec-h">Como competir na S-League</h2>
+      <h2 class="sec-h">Você quer participar da S-League?</h2>
+      <p class="intro" style="margin-bottom:14px">Não precisa ser famoso nem ter público. Na prática, todo atleta chega ao circuito por um destes caminhos:</p>
       <div class="steps">
-        <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Visibilidade</h4><p>Atletas independentes se projetam em lives e torneios abertos, construindo repertório e público antes de disputar o circuito oficial.</p></div></div>
-        <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Open Circuit</h4><p>O classificatório oficial e aberto da liga, realizado antes de cada temporada. Qualquer atleta registrado pode se inscrever. Reúne as três provas em rodadas eliminatórias, e os melhores colocados recebem a elegibilidade para as seletivas.</p></div></div>
-        <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Seletivas de equipe</h4><p>Com o Open no currículo, o atleta pode ser testado ou convocado pelos seis times, que fecham seus elencos na pré-temporada.</p></div></div>
+        <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Open Circuit</h4><p>O classificatório oficial e aberto da liga, disputado antes de cada temporada. Qualquer atleta registrado pode se inscrever, sem custo. Reúne as três provas em rodadas eliminatórias, e os melhores colocados entram no radar dos times. <b>Ou:</b> um time pode convidar diretamente um atleta que já chamou atenção, sem passar pelo classificatório.</p></div></div>
+        <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Seletivas de equipe</h4><p>Os seis times testam e convocam atletas para fechar seus elencos na pré-temporada. É a etapa que decide quem assina.</p></div></div>
         <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Contrato e elenco</h4><p>Assinado o vínculo, o atleta integra o elenco de cinco (quatro ativos e um reserva por etapa) e passa a pontuar pelo time.</p></div></div>
       </div>
       <div class="callout"><b>Inscrições no Open</b> abrem a cada pré-temporada no portal oficial. É exigido registro do atleta, equipamento homologado (liga padrão da liga) e avaliação física. A fase classificatória é gratuita e aberta a todas as idades da base ao profissional.</div>
