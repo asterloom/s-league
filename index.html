@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Portal S-League</title>
-<meta name="description" content="Portal oficial (fictício) da S-League — a liga de skate profissional do universo de Manual de Sobrevivência para Ômegas.">
+<meta name="description" content="Portal oficial da S-League. Temporada 2026: equipes, modalidades, regulamento, classificação e calendário do circuito profissional.">
 <meta property="og:title" content="Portal S-League">
-<meta property="og:description" content="Nova temporada, as três provas, os times e como competir na S-League.">
+<meta property="og:description" content="Temporada 2026: seis equipes, oito etapas e três provas por cidade. Conheça a S-League.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,9 +44,11 @@
     background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);}
   .topbar .row{display:flex; align-items:center; justify-content:space-between; gap:10px; padding-block:11px;}
-  .brand{font-family:var(--display); font-weight:700; letter-spacing:.04em; font-size:16px; display:flex; align-items:baseline; gap:8px;}
+  .identity{display:flex; align-items:baseline; gap:10px; min-width:0;}
+  .brand{font-family:var(--display); font-weight:700; letter-spacing:.04em; font-size:18px; line-height:1;
+    display:inline-flex; align-items:baseline; white-space:nowrap; color:var(--ink);}
   .brand .s{color:var(--hot);}
-  .brand small{color:var(--muted); font-weight:500; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;}
+  .identity .portal-label{color:var(--muted); font-weight:500; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;}
   .tgl{font:inherit; font-size:13px; color:var(--muted); background:var(--surface);
     border:1px solid var(--line); border-radius:999px; padding:6px 12px; cursor:pointer; white-space:nowrap;}
   .tgl:hover{color:var(--ink); border-color:var(--accent);}
@@ -82,9 +84,11 @@
 
   /* tabs */
   .tabs{position:sticky; top:calc(env(safe-area-inset-top,0px) + 49px); z-index:15;
-    display:flex; gap:6px; padding-block:14px 12px; background:var(--bg); border-bottom:1px solid var(--line); margin-top:26px;}
-  .tab{font-family:var(--display); font-weight:600; font-size:15px; color:var(--muted); background:transparent; border:1px solid transparent; border-radius:999px; padding:8px 16px; cursor:pointer;}
+    display:flex; gap:6px; padding-block:12px; background:var(--bg); border-bottom:1px solid var(--line); margin-top:26px;
+    overflow-x:auto; scrollbar-width:thin; scroll-padding-inline:18px;}
+  .tab{font-family:var(--display); font-weight:600; font-size:14px; color:var(--muted); background:transparent; border:1px solid transparent; border-radius:999px; padding:8px 13px; cursor:pointer; white-space:nowrap; flex:none;}
   .tab:hover{color:var(--ink);}
+  .tab:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
   .tab[aria-selected="true"]{color:#fff; background:var(--accent); border-color:var(--accent);}
   :root[data-theme="dark"] .tab[aria-selected="true"]{color:#0c0e14;}
   @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0c0e14;}}
@@ -131,6 +135,32 @@
   .team .cap{font-family:var(--mono); font-size:11.5px; color:var(--accent-ink); margin:2px 0 6px; letter-spacing:.02em;}
   .team .d{color:var(--muted); font-size:13.5px;}
 
+  /* season panels */
+  .season-head{display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:20px;}
+  .season-head h2{font:700 clamp(1.5rem,5vw,2rem)/1.1 var(--display); margin:0 0 8px;}
+  .season-head p{color:var(--muted); margin:0; max-width:56ch;}
+  .status{font:600 11px var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent-ink);
+    background:color-mix(in srgb,var(--accent) 9%,var(--surface)); border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));
+    border-radius:999px; padding:7px 10px; white-space:nowrap;}
+  .standings-card,.notice-card{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px; box-shadow:0 1px 2px var(--shadow);}
+  .standings-card h3,.notice-card h3{font:700 1.2rem var(--display); margin:0 0 6px;}
+  .standings-card p,.notice-card p{color:var(--muted); margin:0; font-size:14px;}
+  .standings-card table{margin-top:14px;}
+  .standings-card th:last-child,.standings-card td:last-child{text-align:right;}
+  .standings-card td{font-weight:600;}
+  .standings-card td.pending{font:500 13px var(--mono); color:var(--muted);}
+  .standings-card caption{caption-side:bottom; text-align:left; color:var(--muted); font-size:12px; padding:12px 8px 2px;}
+  .title-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:14px;}
+  .title-card{background:var(--surface); border:1px solid var(--line); border-radius:13px; padding:14px;}
+  .title-card b{display:block; font:700 1rem var(--display);}
+  .title-card span{display:block; color:var(--muted); font-size:12px; margin-top:5px;}
+  .calendar-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px;}
+  .round{display:flex; align-items:center; gap:15px; background:var(--surface); border:1px solid var(--line); border-radius:13px; padding:16px; min-width:0;}
+  .round .number{font:700 1.35rem var(--display); color:var(--accent-ink); min-width:2ch;}
+  .round b{display:block; font:700 1rem var(--display);}
+  .round small{display:block; color:var(--muted); font-size:12px; margin-top:3px;}
+  .notice-card{margin-top:18px; border-left:4px solid var(--accent);}
+
   /* steps */
   .steps{display:flex; flex-direction:column; gap:0; counter-reset:s;}
   .step{display:flex; gap:14px; padding:14px 2px; border-bottom:1px solid var(--line);}
@@ -170,13 +200,18 @@
   .cmt .t{color:var(--ink);}
   .cmt .t .re{color:var(--muted); font-family:var(--mono); font-size:12px;}
 
-  footer{color:var(--muted); font-size:12.5px; text-align:center; padding:30px 0 12px; line-height:1.7; border-top:1px solid var(--line); margin-top:30px;}
+  footer{color:var(--muted); font-size:12.5px; text-align:center; padding:30px 0 20px; line-height:1.7; border-top:1px solid var(--line); margin-top:30px;}
+  footer .brand{font-size:23px; margin:0 auto 10px;}
+  footer .footer-sub{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px;}
   footer .disc{opacity:.8;}
 
   @media (max-width:520px){
     .promo .stats{grid-template-columns:repeat(2,1fr); row-gap:16px;}
     .promo .stat .n{font-size:1.5rem;}
     .team{min-width:0;}
+    .title-grid{grid-template-columns:1fr;}
+    .calendar-grid{grid-template-columns:1fr;}
+    .identity .portal-label{display:none;}
   }
   @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
@@ -185,7 +220,10 @@
 
 <header class="topbar">
   <div class="wrap row">
-    <div class="brand"><span class="s">S</span>-LEAGUE <small>Portal Oficial</small></div>
+    <div class="identity">
+      <div class="brand" aria-label="S-League"><span class="s">S</span><span>-LEAGUE</span></div>
+      <span class="portal-label">Portal Oficial</span>
+    </div>
     <button class="tgl" id="tgl" type="button" aria-label="Alternar tema">tema</button>
   </div>
 </header>
@@ -196,7 +234,7 @@
     <div class="inner">
       <p class="ey">Nova Temporada · 2026 <span class="live"><span class="pulse" aria-hidden="true"></span>ao vivo em breve</span></p>
       <h1>A corrida pelo título de Equipes recomeça.</h1>
-      <p>Seis times, oito etapas, três provas por cidade. Uma temporada inteira decidida no detalhe — e um só troféu que importa: o coletivo.</p>
+      <p>Seis times, oito etapas, três provas por cidade. Quatro títulos em disputa — e a corrida pelo troféu de Equipes.</p>
       <div class="stats">
         <div class="stat"><div class="n">8</div><div class="l">Etapas</div></div>
         <div class="stat"><div class="n">6</div><div class="l">Times</div></div>
@@ -218,6 +256,9 @@
 
   <nav class="tabs" role="tablist" aria-label="Seções">
     <button class="tab" id="t-league" role="tab" aria-selected="true" aria-controls="p-league">A Liga</button>
+    <button class="tab" id="t-teams" role="tab" aria-selected="false" aria-controls="p-teams">Times</button>
+    <button class="tab" id="t-standings" role="tab" aria-selected="false" aria-controls="p-standings">Classificação</button>
+    <button class="tab" id="t-calendar" role="tab" aria-selected="false" aria-controls="p-calendar">Calendário</button>
     <button class="tab" id="t-giria" role="tab" aria-selected="false" aria-controls="p-giria">Glossário</button>
   </nav>
 
@@ -275,15 +316,8 @@
       </div>
       <p class="intro" style="margin:14px 0 0">Ao fim da temporada saem <b>quatro títulos</b>: campeão de cada prova (Street, Race e Hybrid) e o principal, o de <b>Equipes</b> — a soma de todos os pontos do elenco. É por isso que um time equilibrado supera uma única estrela: o campeonato premia o conjunto.</p>
 
-      <h2 class="sec-h">Os seis times</h2>
-      <div class="teams">
-        <div class="team"><div class="sym">🌹</div><div><div class="n">Pandora</div><div class="cap">Capitão · Adam</div><div class="d">Atual campeã da S-League, a Pandora reúne alguns dos maiores talentos do circuito nacional e internacional. Com alto investimento, elenco de elite e uma cultura voltada para resultados, a equipe chega a cada temporada com a mesma expectativa: permanecer no topo.</div></div></div>
-        <div class="team"><div class="sym">🌊</div><div><div class="n">Wave</div><div class="cap">Capitão · Snow</div><div class="d">A Wave combina velocidade, técnica e versatilidade em um elenco capaz de competir em diferentes modalidades. Conhecida por grandes desempenhos individuais, a equipe entra na nova temporada em busca de maior consistência e força coletiva.</div></div></div>
-        <div class="team"><div class="sym">💎</div><div><div class="n">Prism</div><div class="cap">Capitão · Cherry</div><div class="d">Precisão, estratégia e inovação definem a Prism. A equipe aposta em preparação técnica rigorosa e leitura de pista para transformar pequenos detalhes em vantagem, mantendo um dos estilos mais controlados e refinados da S-League.</div></div></div>
-        <div class="team"><div class="sym">🐍</div><div><div class="n">Rush</div><div class="cap">Capitão · Joe</div><div class="d">Potência, intensidade e coragem fazem parte da identidade da Rush. É uma equipe agressiva na pista, que prefere assumir riscos e disputar espaço a esperar pelo erro dos adversários.</div></div></div>
-        <div class="team"><div class="sym">🦇</div><div><div class="n">Afterdark</div><div class="cap">Capitão · Shadow</div><div class="d">A Afterdark transformou competição em espetáculo. Com uma identidade visual marcante e um estilo ousado e imprevisível, a equipe é conhecida por performances que chamam atenção antes, durante e depois da largada.</div></div></div>
-        <div class="team"><div class="sym">👾</div><div><div class="n">Arcade</div><div class="cap">Capitão · Genji</div><div class="d">A Arcade construiu sua reputação apostando em desenvolvimento, experiência e trabalho coletivo. Sem depender de grandes contratações, a equipe valoriza talentos em crescimento e costuma surpreender adversários quando menos se espera.</div></div></div>
-      </div>
+      <h2 class="sec-h">Como funciona a escalação</h2>
+      <p class="intro">Cada time tem <b>cinco atletas</b> no elenco. A cada etapa, escala <b>quatro ativos e um reserva</b>. São dois representantes por prova, e cada atleta pode disputar no máximo duas das três provas. Assim, cada largada reúne 12 competidores, dois de cada equipe.</p>
 
       <h2 class="sec-h">Você quer participar da S-League?</h2>
       <p class="intro" style="margin-bottom:14px">Não precisa ser famoso nem ter público. Na prática, todo atleta chega ao circuito por um destes caminhos:</p>
@@ -292,7 +326,62 @@
         <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Seletivas de equipe</h4><p>Os seis times testam e convocam atletas para fechar seus elencos na pré-temporada. É a etapa que decide quem assina.</p></div></div>
         <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Contrato e elenco</h4><p>Assinado o vínculo, o atleta integra o elenco de cinco (quatro ativos e um reserva por etapa) e passa a pontuar pelo time.</p></div></div>
       </div>
-      <div class="callout"><b>Inscrições no Open</b> abrem a cada pré-temporada no portal oficial. É exigido registro do atleta, equipamento homologado (liga padrão da liga) e avaliação física. A fase classificatória é gratuita e aberta a todas as idades da base ao profissional.</div>
+      <div class="callout"><b>Inscrições no Open</b> abrem a cada pré-temporada no portal oficial. É exigido registro do atleta, equipamento homologado com o compósito padrão da S-League e avaliação física. A fase classificatória é gratuita e aberta a todas as idades da base ao profissional.</div>
+    </section>
+
+    <!-- ===== TIMES ===== -->
+    <section id="p-teams" role="tabpanel" aria-labelledby="t-teams" hidden>
+      <div class="season-head"><div><h2>Os seis times</h2><p>Conheça as equipes que disputam a temporada 2026.</p></div><span class="status">Temporada 2026</span></div>
+      <div class="teams">
+        <div class="team"><div class="sym" aria-hidden="true">🌹</div><div><div class="n">Pandora</div><div class="cap">Capitão · Adam</div><div class="d">Atual campeã da S-League, a Pandora reúne alguns dos maiores talentos do circuito nacional e internacional. Com alto investimento, elenco de elite e uma cultura voltada para resultados, a equipe chega a cada temporada com a mesma expectativa: permanecer no topo.</div></div></div>
+        <div class="team"><div class="sym" aria-hidden="true">🌊</div><div><div class="n">Wave</div><div class="cap">Capitão · Snow</div><div class="d">A Wave combina velocidade, técnica e versatilidade em um elenco capaz de competir em diferentes modalidades. Conhecida por grandes desempenhos individuais, a equipe entra na nova temporada em busca de maior consistência e força coletiva.</div></div></div>
+        <div class="team"><div class="sym" aria-hidden="true">💎</div><div><div class="n">Prism</div><div class="cap">Capitão · Cherry</div><div class="d">Precisão, estratégia e inovação definem a Prism. A equipe aposta em preparação técnica rigorosa e leitura de pista para transformar pequenos detalhes em vantagem, mantendo um dos estilos mais controlados e refinados da S-League.</div></div></div>
+        <div class="team"><div class="sym" aria-hidden="true">🐍</div><div><div class="n">Rush</div><div class="cap">Capitão · Joe</div><div class="d">Potência, intensidade e coragem fazem parte da identidade da Rush. É uma equipe agressiva na pista, que prefere assumir riscos e disputar espaço a esperar pelo erro dos adversários.</div></div></div>
+        <div class="team"><div class="sym" aria-hidden="true">🦇</div><div><div class="n">Afterdark</div><div class="cap">Capitão · Shadow</div><div class="d">A Afterdark transformou competição em espetáculo. Com uma identidade visual marcante e um estilo ousado e imprevisível, a equipe é conhecida por performances que chamam atenção antes, durante e depois da largada.</div></div></div>
+        <div class="team"><div class="sym" aria-hidden="true">👾</div><div><div class="n">Arcade</div><div class="cap">Capitão · Genji</div><div class="d">A Arcade construiu sua reputação apostando em desenvolvimento, experiência e trabalho coletivo. Sem depender de grandes contratações, a equipe valoriza talentos em crescimento e costuma surpreender adversários quando menos se espera.</div></div></div>
+      </div>
+    </section>
+
+    <!-- ===== CLASSIFICAÇÃO ===== -->
+    <section id="p-standings" role="tabpanel" aria-labelledby="t-standings" hidden>
+      <div class="season-head"><div><h2>Classificação</h2><p>A temporada ainda não começou. Os resultados e pontos serão publicados após cada etapa.</p></div><span class="status">Pré-temporada</span></div>
+      <div class="standings-card">
+        <h3>Título por Equipes</h3>
+        <p>Os pontos dos atletas nas três provas são somados para a equipe.</p>
+        <table><caption>Equipes em ordem alfabética; nenhuma posição foi definida.</caption>
+          <thead><tr><th scope="col">Equipe</th><th scope="col">Pontos</th></tr></thead>
+          <tbody>
+            <tr><td>Afterdark</td><td class="pending">—</td></tr>
+            <tr><td>Arcade</td><td class="pending">—</td></tr>
+            <tr><td>Pandora</td><td class="pending">—</td></tr>
+            <tr><td>Prism</td><td class="pending">—</td></tr>
+            <tr><td>Rush</td><td class="pending">—</td></tr>
+            <tr><td>Wave</td><td class="pending">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="sec-h">Títulos individuais</h3>
+      <div class="title-grid">
+        <div class="title-card"><b>Street</b><span>Classificação após a etapa 1</span></div>
+        <div class="title-card"><b>Race</b><span>Classificação após a etapa 1</span></div>
+        <div class="title-card"><b>Hybrid</b><span>Classificação após a etapa 1</span></div>
+      </div>
+    </section>
+
+    <!-- ===== CALENDÁRIO ===== -->
+    <section id="p-calendar" role="tabpanel" aria-labelledby="t-calendar" hidden>
+      <div class="season-head"><div><h2>Calendário 2026</h2><p>Oito etapas, com Street, Race e Hybrid em cada cidade. Datas e sedes serão anunciadas pela organização.</p></div><span class="status">Datas a confirmar</span></div>
+      <div class="calendar-grid">
+        <div class="round"><span class="number">01</span><div><b>Etapa 1</b><small>Data e cidade a confirmar</small></div></div>
+        <div class="round"><span class="number">02</span><div><b>Etapa 2</b><small>Data e cidade a confirmar</small></div></div>
+        <div class="round"><span class="number">03</span><div><b>Etapa 3</b><small>Data e cidade a confirmar</small></div></div>
+        <div class="round"><span class="number">04</span><div><b>Etapa 4</b><small>Data e cidade a confirmar</small></div></div>
+        <div class="round"><span class="number">05</span><div><b>Etapa 5</b><small>Data e cidade a confirmar</small></div></div>
+        <div class="round"><span class="number">06</span><div><b>Etapa 6</b><small>Data e cidade a confirmar</small></div></div>
+        <div class="round"><span class="number">07</span><div><b>Etapa 7</b><small>Data e cidade a confirmar</small></div></div>
+        <div class="round"><span class="number">08</span><div><b>Etapa 8</b><small>Data e cidade a confirmar</small></div></div>
+      </div>
+      <div class="notice-card"><h3>Programação de cada etapa</h3><p>As três provas acontecem em cada cidade. O calendário detalhado, as sedes e os horários de transmissão serão divulgados aqui.</p></div>
     </section>
 
     <!-- ===== GLOSSÁRIO ===== -->
@@ -362,8 +451,9 @@
 </div>
 
 <footer class="wrap">
-  <div>Portal Oficial da S-League · Temporada 2026</div>
-  <div class="disc">Universo de <b>Manual de Sobrevivência para Ômegas</b>. Liga, times e atletas são ficção.</div>
+  <div class="brand" aria-label="S-League"><span class="s">S</span><span>-LEAGUE</span></div>
+  <div class="footer-sub">Portal oficial · Temporada 2026</div>
+  <div class="disc">Projeto ficcional: S-League, seus times e atletas fazem parte de <b>Manual de Sobrevivência para Ômegas</b>.</div>
 </footer>
 
 <script>
@@ -382,17 +472,37 @@
   })();
 
   (function(){
-    var tabs=[document.getElementById('t-league'),document.getElementById('t-giria')];
-    var panels=[document.getElementById('p-league'),document.getElementById('p-giria')];
-    function sel(k){
-      tabs.forEach(function(t,j){ t.setAttribute('aria-selected', j===k?'true':'false'); });
-      panels.forEach(function(p,j){ p.hidden = j!==k; });
-      try{ localStorage.setItem('sl-tab2',k); }catch(e){}
+    var ids=['league','teams','standings','calendar','giria'];
+    var slugs=['liga','times','classificacao','calendario','glossario'];
+    var tabs=ids.map(function(id){ return document.getElementById('t-'+id); });
+    var panels=ids.map(function(id){ return document.getElementById('p-'+id); });
+    function select(k, updateUrl){
+      if(k<0 || k>=tabs.length) k=0;
+      tabs.forEach(function(t,j){
+        t.setAttribute('aria-selected', j===k?'true':'false');
+        t.tabIndex=j===k?0:-1;
+      });
+      panels.forEach(function(p,j){ p.hidden=j!==k; });
+      if(updateUrl) tabs[k].scrollIntoView({block:'nearest',inline:'nearest'});
+      try{ localStorage.setItem('sl-section',slugs[k]); }catch(e){}
+      if(updateUrl && history.replaceState) history.replaceState(null,'','#'+slugs[k]);
     }
-    tabs.forEach(function(t,j){ t.addEventListener('click',function(){ sel(j); }); });
-    var start=0; try{ var v=localStorage.getItem('sl-tab2'); if(v!==null) start=+v; }catch(e){}
-    if(location.hash==='#glossario') start=1;
-    sel(start||0);
+    tabs.forEach(function(t,j){
+      t.addEventListener('click',function(){ select(j,true); });
+      t.addEventListener('keydown',function(e){
+        var next=e.key==='ArrowRight'?(j+1)%tabs.length:e.key==='ArrowLeft'?(j+tabs.length-1)%tabs.length:e.key==='Home'?0:e.key==='End'?tabs.length-1:-1;
+        if(next<0) return;
+        e.preventDefault(); select(next,true); tabs[next].focus();
+      });
+    });
+    var start=-1;
+    if(location.hash) start=slugs.indexOf(decodeURIComponent(location.hash.slice(1)));
+    if(start<0){ try{ start=slugs.indexOf(localStorage.getItem('sl-section')); }catch(e){} }
+    select(start<0?0:start,false);
+    window.addEventListener('hashchange',function(){
+      var k=slugs.indexOf(decodeURIComponent(location.hash.slice(1)));
+      if(k>=0) select(k,false);
+    });
   })();
 
   (function(){
