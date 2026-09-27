@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portal S-League</title>
+<meta name="description" content="Portal oficial (fictício) da S-League — a liga de skate profissional do universo de Manual de Sobrevivência para Ômegas.">
+<meta property="og:title" content="Portal S-League">
+<meta property="og:description" content="Nova temporada, as três provas, os times e como competir na S-League.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+  [hidden]{display:none!important}
+  img{max-width:100%}
+  :root{
+    --bg:#eceef3; --surface:#ffffff; --surface-2:#f5f6fa; --ink:#14171f; --muted:#59606f;
+    --line:#e0e3ea; --accent:#2b5bff; --accent-ink:#1e46d6; --hot:#ff2f74; --good:#0fae7a;
+    --shadow:rgba(20,23,31,.09);
+    --display:"Chakra Petch",system-ui,sans-serif;
+    --body:"Manrope",system-ui,-apple-system,sans-serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,monospace;
+  }
+  :root:not([data-theme="light"]){ @media (prefers-color-scheme: dark){
+    --bg:#0c0e14; --surface:#161a22; --surface-2:#1c212b; --ink:#eef1f6; --muted:#98a1b2;
+    --line:#272d39; --accent:#6f8dff; --accent-ink:#a6b9ff; --hot:#ff5c93; --good:#2fd39c;
+    --shadow:rgba(0,0,0,.45); color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#0c0e14; --surface:#161a22; --surface-2:#1c212b; --ink:#eef1f6; --muted:#98a1b2;
+    --line:#272d39; --accent:#6f8dff; --accent-ink:#a6b9ff; --hot:#ff5c93; --good:#2fd39c;
+    --shadow:rgba(0,0,0,.45); color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.55;
+    -webkit-font-smoothing:antialiased; margin:0;}
+  .wrap{max-width:820px; margin:0 auto; padding-inline:18px;}
+  a{color:var(--accent-ink);}
+
+  /* top bar */
+  .topbar{position:sticky; top:env(safe-area-inset-top,0px); z-index:20;
+    background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);}
+  .topbar .row{display:flex; align-items:center; justify-content:space-between; gap:10px; padding-block:11px;}
+  .brand{font-family:var(--display); font-weight:700; letter-spacing:.04em; font-size:16px; display:flex; align-items:baseline; gap:8px;}
+  .brand .s{color:var(--hot);}
+  .brand small{color:var(--muted); font-weight:500; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;}
+  .tgl{font:inherit; font-size:13px; color:var(--muted); background:var(--surface);
+    border:1px solid var(--line); border-radius:999px; padding:6px 12px; cursor:pointer; white-space:nowrap;}
+  .tgl:hover{color:var(--ink); border-color:var(--accent);}
+
+  /* season promo (committed dark billboard) */
+  .promo{margin-top:22px; border-radius:20px; overflow:hidden; position:relative; color:#f4f7ff;
+    background:
+      radial-gradient(130% 120% at 85% -20%, rgba(255,255,255,.16), transparent 60%),
+      linear-gradient(135deg,#4f46e5 0%,#7c3aed 46%,#d6318f 100%);
+    border:1px solid rgba(255,255,255,.18); box-shadow:0 18px 40px -22px rgba(124,58,237,.5);}
+  .promo .inner{padding:30px 24px 26px;}
+  .promo .ey{font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#e6e2ff; margin:0 0 14px; display:flex; align-items:center; gap:9px; flex-wrap:wrap;}
+  .promo .ey .live{display:inline-flex; align-items:center; gap:6px; color:#ffd7e8;}
+  .promo .ey .pulse{width:8px; height:8px; border-radius:50%; background:#ff2f74; box-shadow:0 0 0 0 rgba(255,47,116,.6); animation:pulse 2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,47,116,.55)} 70%{box-shadow:0 0 0 9px rgba(255,47,116,0)} 100%{box-shadow:0 0 0 0 rgba(255,47,116,0)}}
+  @media (prefers-reduced-motion:reduce){.promo .ey .pulse{animation:none}}
+  .promo h1{font-family:var(--display); font-weight:700; font-size:clamp(1.9rem,6.4vw,2.9rem); line-height:1.03; margin:0; letter-spacing:-.01em; text-wrap:balance;}
+  .promo p{color:rgba(255,255,255,.86); margin:14px 0 20px; max-width:46ch;}
+  .promo .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; border-top:1px solid rgba(255,255,255,.2); padding-top:18px;}
+  .promo .stat{min-width:0;}
+  .promo .stat .n{font-family:var(--display); font-weight:700; font-size:1.7rem; line-height:1; color:#fff;}
+  .promo .stat .l{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.72); margin-top:5px;}
+
+  /* broadcast band */
+  .cast{margin-top:14px; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; box-shadow:0 1px 2px var(--shadow);}
+  .cast .t{font-family:var(--display); font-weight:600; font-size:.78rem; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin:0 0 12px; display:flex; align-items:center; gap:9px;}
+  .cast .t .dot{width:8px; height:8px; border-radius:50%; background:var(--hot); box-shadow:0 0 8px var(--hot);}
+  .channels{display:flex; flex-wrap:wrap; gap:9px;}
+  .ch{display:flex; align-items:center; gap:9px; background:var(--surface-2); border:1px solid var(--line); border-radius:11px; padding:9px 12px; min-width:0;}
+  .ch .nm{font-family:var(--display); font-weight:600; font-size:14px; color:var(--ink);}
+  .ch .sub{font-size:12px; color:var(--muted);}
+  .ch .glow{font-size:15px;}
+
+  /* tabs */
+  .tabs{position:sticky; top:calc(env(safe-area-inset-top,0px) + 49px); z-index:15;
+    display:flex; gap:6px; padding-block:14px 12px; background:var(--bg); border-bottom:1px solid var(--line); margin-top:26px;}
+  .tab{font-family:var(--display); font-weight:600; font-size:15px; color:var(--muted); background:transparent; border:1px solid transparent; border-radius:999px; padding:8px 16px; cursor:pointer;}
+  .tab:hover{color:var(--ink);}
+  .tab[aria-selected="true"]{color:#fff; background:var(--accent); border-color:var(--accent);}
+  :root[data-theme="dark"] .tab[aria-selected="true"]{color:#0c0e14;}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0c0e14;}}
+
+  main{padding-block:24px 8px;}
+  .intro{color:var(--muted); margin:0 0 22px; font-size:1.02rem;}
+  .intro b{color:var(--ink);}
+
+  .sec-h{font-family:var(--display); font-weight:700; font-size:.82rem; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin:30px 0 14px; display:flex; align-items:center; gap:10px;}
+  .sec-h:first-child{margin-top:0;}
+  .sec-h::after{content:""; flex:1; height:1px; background:var(--line);}
+
+  /* prova cards */
+  .provas{display:grid; gap:14px;}
+  .prova{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px 18px 16px; box-shadow:0 1px 2px var(--shadow); position:relative; overflow:hidden;}
+  .prova::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--pc,var(--accent));}
+  .prova .hd{display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding-left:6px; flex-wrap:wrap;}
+  .prova h3{font-family:var(--display); font-weight:700; font-size:1.3rem; margin:0; color:var(--ink);}
+  .prova .tagline{font-family:var(--mono); font-size:11.5px; color:var(--pc,var(--accent)); letter-spacing:.04em; text-transform:uppercase;}
+  .prova p{margin:10px 0 10px; padding-left:6px; color:var(--muted);}
+  .prova p b{color:var(--ink); font-weight:600;}
+  .howto{padding-left:6px; margin:0;}
+  .howto span{display:inline-block; font-family:var(--mono); font-size:11.5px; color:var(--muted); border:1px dashed var(--line); border-radius:8px; padding:4px 8px; margin:2px 4px 0 0;}
+
+  .tablecard{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:6px 4px; box-shadow:0 1px 2px var(--shadow); overflow-x:auto;}
+  table{border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums;}
+  th,td{padding:9px 12px; text-align:left; font-size:14px; border-bottom:1px solid var(--line);}
+  th{font-family:var(--display); font-weight:600; color:var(--muted); font-size:12px; letter-spacing:.06em; text-transform:uppercase;}
+  tr:last-child td{border-bottom:none;}
+  td.pts{font-family:var(--display); font-weight:700; color:var(--accent-ink); text-align:right;}
+  td.pos{color:var(--muted);}
+
+  /* teams */
+  .teams{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px;}
+  .team{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; box-shadow:0 1px 2px var(--shadow); display:flex; gap:14px; align-items:flex-start;}
+  .team .sym{font-size:30px; line-height:1; flex:none; width:46px; height:46px; display:grid; place-items:center; background:var(--surface-2); border:1px solid var(--line); border-radius:12px;}
+  .team .n{font-family:var(--display); font-weight:700; font-size:1.12rem; color:var(--ink);}
+  .team .cap{font-family:var(--mono); font-size:11.5px; color:var(--accent-ink); margin:2px 0 6px; letter-spacing:.02em;}
+  .team .d{color:var(--muted); font-size:13.5px;}
+
+  /* steps */
+  .steps{display:flex; flex-direction:column; gap:0; counter-reset:s;}
+  .step{display:flex; gap:14px; padding:14px 2px; border-bottom:1px solid var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step .num{counter-increment:s; flex:none; width:30px; height:30px; border-radius:9px; display:grid; place-items:center; font-family:var(--display); font-weight:700; font-size:14px; color:#fff; background:var(--accent);}
+  :root[data-theme="dark"] .step .num{color:#0c0e14;}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .step .num{color:#0c0e14;}}
+  .step .num::before{content:counter(s);}
+  .step h4{font-family:var(--display); font-weight:600; font-size:1.02rem; margin:2px 0 3px; color:var(--ink);}
+  .step p{margin:0; color:var(--muted); font-size:14px;}
+
+  .callout{background:var(--surface-2); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:12px; padding:14px 16px; margin:20px 0 0; color:var(--muted); font-size:14px;}
+  .callout b{color:var(--ink);}
+
+  /* glossary */
+  .filter{position:relative; margin:0 0 18px;}
+  .filter input{width:100%; font:inherit; font-size:15px; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px 14px 12px 40px;}
+  .filter input:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent);}
+  .filter svg{position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--muted);}
+  .terms{display:flex; flex-direction:column; gap:2px;}
+  .term{padding:14px 2px; border-bottom:1px solid var(--line);}
+  .term-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+  .term dt{font-family:var(--display); font-weight:600; font-size:1.1rem; color:var(--ink);}
+  .chip{font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-ink); border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line)); border-radius:999px; padding:2px 8px; background:color-mix(in srgb,var(--accent) 8%,transparent);}
+  .chip.tech{color:var(--hot); border-color:color-mix(in srgb,var(--hot) 40%,var(--line)); background:color-mix(in srgb,var(--hot) 8%,transparent);}
+  .chip.comp{color:var(--good); border-color:color-mix(in srgb,var(--good) 42%,var(--line)); background:color-mix(in srgb,var(--good) 9%,transparent);}
+  .term dd{margin:6px 0 0; color:var(--muted);}
+  .term dd b{color:var(--ink); font-weight:600;}
+  .noresult{color:var(--muted); padding:20px 2px; font-style:italic;}
+
+  .comments{margin:34px 0 0; border-top:1px solid var(--line); padding-top:22px;}
+  .comments .h{font-family:var(--display); font-weight:600; font-size:.82rem; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin:0 0 14px; display:flex; align-items:center; gap:8px;}
+  .comments .h .count{font-family:var(--mono); font-weight:400; color:var(--muted); letter-spacing:0; text-transform:none;}
+  .cmt{display:flex; gap:9px; padding:9px 0; font-size:14px; align-items:flex-start;}
+  .cmt .bub{color:var(--muted); flex:none;}
+  .cmt .u{font-family:var(--mono); font-size:12.5px; color:var(--accent-ink); white-space:nowrap;}
+  .cmt .t{color:var(--ink);}
+  .cmt .t .re{color:var(--muted); font-family:var(--mono); font-size:12px;}
+
+  footer{color:var(--muted); font-size:12.5px; text-align:center; padding:30px 0 12px; line-height:1.7; border-top:1px solid var(--line); margin-top:30px;}
+  footer .disc{opacity:.8;}
+
+  @media (max-width:520px){
+    .promo .stats{grid-template-columns:repeat(2,1fr); row-gap:16px;}
+    .promo .stat .n{font-size:1.5rem;}
+    .team{min-width:0;}
+  }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap row">
+    <div class="brand"><span class="s">S</span>-LEAGUE <small>Portal Oficial</small></div>
+    <button class="tgl" id="tgl" type="button" aria-label="Alternar tema">tema</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- SEASON PROMO -->
+  <section class="promo" aria-label="Nova temporada">
+    <div class="inner">
+      <p class="ey">Nova Temporada · 2026 <span class="live"><span class="pulse" aria-hidden="true"></span>ao vivo em breve</span></p>
+      <h1>A corrida pelo título de Equipes recomeça.</h1>
+      <p>Seis times, oito etapas, três provas por cidade. Uma temporada inteira decidida no detalhe — e um só troféu que importa: o coletivo.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">8</div><div class="l">Etapas</div></div>
+        <div class="stat"><div class="n">6</div><div class="l">Times</div></div>
+        <div class="stat"><div class="n">3</div><div class="l">Provas</div></div>
+        <div class="stat"><div class="n">4</div><div class="l">Títulos</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BROADCAST -->
+  <section class="cast" aria-label="Onde assistir">
+    <p class="t"><span class="dot" aria-hidden="true"></span> Onde assistir · transmissão oficial ao vivo</p>
+    <div class="channels">
+      <div class="ch"><span class="glow">📡</span><div><div class="nm">S-League Live</div><div class="sub">todas as etapas, ao vivo</div></div></div>
+      <div class="ch"><span class="glow">▶</span><div><div class="nm">@ SLeagueOficial</div><div class="sub">cortes e melhores momentos</div></div></div>
+      <div class="ch"><span class="glow">🎙️</span><div><div class="nm">S-Cast</div><div class="sub">análise pós-etapa</div></div></div>
+    </div>
+  </section>
+
+  <nav class="tabs" role="tablist" aria-label="Seções">
+    <button class="tab" id="t-league" role="tab" aria-selected="true" aria-controls="p-league">A Liga</button>
+    <button class="tab" id="t-giria" role="tab" aria-selected="false" aria-controls="p-giria">Glossário</button>
+  </nav>
+
+  <main>
+    <!-- ===== LIGA ===== -->
+    <section id="p-league" role="tabpanel" aria-labelledby="t-league">
+      <p class="intro">A <b>S-League</b> é a principal liga de skate profissional do país. A temporada corre em <b>8 etapas</b>, cada uma numa cidade, e cada etapa disputa <b>3 provas</b>. As regras não mudam; a pista de cada cidade, sim.</p>
+
+      <h2 class="sec-h">As três provas</h2>
+      <div class="provas">
+        <article class="prova" style="--pc:var(--accent)">
+          <div class="hd"><h3>Street</h3><span class="tagline">criatividade técnica</span></div>
+          <p>Disputa individual e julgada por nota, onde o estilo pesa tanto quanto o acerto. Cada atleta monta a própria linha na pista. A final combina a melhor <b>run</b> às duas melhores tentativas de <b>best trick</b>.</p>
+          <p class="howto"><b>Nota:</b> <span>melhor run</span><span>+ 2 melhores best tricks</span><span>até 300</span></p>
+        </article>
+        <article class="prova" style="--pc:var(--good)">
+          <div class="hd"><h3>Race</h3><span class="tagline">velocidade e posição</span></div>
+          <p>Corrida de descida, sem nota técnica, disputada em baterias eliminatórias até a final de seis. Percurso com curvas, túneis, saltos e caminhos alternativos. <b>Vence quem cruza a linha primeiro.</b></p>
+          <p class="howto"><b>Resultado:</b> <span>ordem de chegada</span><span>define a colocação</span></p>
+        </article>
+        <article class="prova" style="--pc:var(--hot)">
+          <div class="hd"><h3>Hybrid</h3><span class="tagline">a prova rainha</span></div>
+          <p>A prova mais prestigiosa, e a única que reúne as duas anteriores. <b>Os 12 atletas descem juntos</b>, mas cruzar a linha primeiro não garante a vitória: cada um também é avaliado pela técnica e pela linha escolhida. O equilíbrio entre risco e velocidade decide tudo.</p>
+          <p class="howto"><b>Nota até 100:</b> <span>técnica 35</span><span>execução 20</span><span>linha 20</span><span>corrida 25</span></p>
+        </article>
+      </div>
+
+      <h2 class="sec-h">Pontuação e títulos</h2>
+      <p class="intro" style="margin-bottom:12px">Em cada prova, a colocação rende pontos de campeonato pela mesma tabela:</p>
+      <div class="tablecard">
+        <table>
+          <thead><tr><th>Pos.</th><th style="text-align:right">Pts</th><th>Pos.</th><th style="text-align:right">Pts</th><th>Pos.</th><th style="text-align:right">Pts</th></tr></thead>
+          <tbody>
+            <tr><td class="pos">1º</td><td class="pts">25</td><td class="pos">5º</td><td class="pts">10</td><td class="pos">9º</td><td class="pts">4</td></tr>
+            <tr><td class="pos">2º</td><td class="pts">18</td><td class="pos">6º</td><td class="pts">8</td><td class="pos">10º</td><td class="pts">3</td></tr>
+            <tr><td class="pos">3º</td><td class="pts">15</td><td class="pos">7º</td><td class="pts">6</td><td class="pos">11º</td><td class="pts">1</td></tr>
+            <tr><td class="pos">4º</td><td class="pts">12</td><td class="pos">8º</td><td class="pts">5</td><td class="pos">12º</td><td class="pts">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="intro" style="margin:14px 0 0">Ao fim da temporada saem <b>quatro títulos</b>: campeão de cada prova (Street, Race e Hybrid) e o principal, o de <b>Equipes</b> — a soma de todos os pontos do elenco. É por isso que um time equilibrado supera uma única estrela: o campeonato premia o conjunto.</p>
+
+      <h2 class="sec-h">Os seis times</h2>
+      <div class="teams">
+        <div class="team"><div class="sym">🌹</div><div><div class="n">Pandora</div><div class="cap">Capitão · Adam</div><div class="d">Atual campeã por Equipes. O maior orçamento do circuito, montado com estrelas contratadas no mundo inteiro. Vermelho e preto.</div></div></div>
+        <div class="team"><div class="sym">🌊</div><div><div class="n">Wave</div><div class="cap">Capitão · Langa "Snow" Hasegawa</div><div class="d">Construído em torno do maior nome da Hybrid. Em reconstrução: a missão é transformar talento individual em resultado de equipe. Azul e branco.</div></div></div>
+        <div class="team"><div class="sym">💎</div><div><div class="n">Prism</div><div class="cap">Capitão · Cherry (Kaoru)</div><div class="d">Referência em precisão e rigor técnico, com forte presença no Street. Rosa e branco.</div></div></div>
+        <div class="team"><div class="sym">🐍</div><div><div class="n">Rush</div><div class="cap">Capitão · Joe (Kojiro)</div><div class="d">Um dos elencos mais físicos da liga — potência e velocidade em primeiro plano. Verde e preto.</div></div></div>
+        <div class="team"><div class="sym">🦇</div><div><div class="n">Afterdark</div><div class="cap">Capitão · Shadow</div><div class="d">Identidade teatral e imponente, forte no Street e resistente na Race. Roxo e preto.</div></div></div>
+        <div class="team"><div class="sym">👾</div><div><div class="n">Arcade</div><div class="cap">Capitão · Genji</div><div class="d">O time formador do circuito: revela jovens talentos e conquista o público como azarão. Dourado e preto.</div></div></div>
+      </div>
+
+      <h2 class="sec-h">Como competir na S-League</h2>
+      <div class="steps">
+        <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Visibilidade</h4><p>Atletas independentes se projetam em lives e torneios abertos, construindo repertório e público antes de disputar o circuito oficial.</p></div></div>
+        <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Open Circuit</h4><p>O classificatório oficial e aberto da liga, realizado antes de cada temporada. Qualquer atleta registrado pode se inscrever. Reúne as três provas em rodadas eliminatórias, e os melhores colocados recebem a elegibilidade para as seletivas.</p></div></div>
+        <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Seletivas de equipe</h4><p>Com o Open no currículo, o atleta pode ser testado ou convocado pelos seis times, que fecham seus elencos na pré-temporada.</p></div></div>
+        <div class="step"><div class="num" aria-hidden="true"></div><div><h4>Contrato e elenco</h4><p>Assinado o vínculo, o atleta integra o elenco de cinco (quatro ativos e um reserva por etapa) e passa a pontuar pelo time.</p></div></div>
+      </div>
+      <div class="callout"><b>Inscrições no Open</b> abrem a cada pré-temporada no portal oficial. É exigido registro do atleta, equipamento homologado (liga padrão da liga) e avaliação física. A fase classificatória é gratuita e aberta a todas as idades da base ao profissional.</div>
+    </section>
+
+    <!-- ===== GLOSSÁRIO ===== -->
+    <section id="p-giria" role="tabpanel" aria-labelledby="t-giria" hidden>
+      <p class="intro">Os termos que aparecem nas transmissões, para acompanhar as provas sem se perder.</p>
+      <div class="filter">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <input id="q" type="text" placeholder="Buscar termo… (ex: gap, bifurcação, best trick)" autocomplete="off" aria-label="Buscar termo">
+      </div>
+      <dl class="terms" id="list">
+        <h2 class="sec-h">Equipamento</h2>
+        <div class="term"><div class="term-top"><dt>Shape</dt><span class="chip">equipamento</span></div><dd>A prancha do skate. Na liga, é feita de uma <b>liga ajustável</b>, não de madeira: o atleta define rigidez, flexibilidade e resposta conforme a prova.</dd></div>
+        <div class="term"><div class="term-top"><dt>Truck</dt><span class="chip">equipamento</span></div><dd>O eixo de metal sob o shape que sustenta as rodas e controla o giro. O ajuste altera a estabilidade e a agilidade.</dd></div>
+        <div class="term"><div class="term-top"><dt>Lixa (grip)</dt><span class="chip">equipamento</span></div><dd>A superfície áspera sobre o shape, responsável pela aderência dos pés do atleta.</dd></div>
+        <div class="term"><div class="term-top"><dt>Setup</dt><span class="chip">equipamento</span></div><dd>A montagem completa — shape, trucks, rodas e rolamentos — regulada atleta por atleta e prova por prova.</dd></div>
+        <div class="term"><div class="term-top"><dt>Liga ajustável</dt><span class="chip tech">tecnologia</span></div><dd>Material padrão dos shapes da liga. Todos usam a mesma base — a diferença competitiva está no <b>projeto e no ajuste</b>, não no acesso ao material.</dd></div>
+        <div class="term"><div class="term-top"><dt>Sensores</dt><span class="chip tech">tecnologia</span></div><dd>Embarcados no shape, registram pressão, impacto, velocidade e aterrissagem. Após a descida, geram uma análise detalhada do desempenho. Não interferem na pilotagem.</dd></div>
+        <div class="term"><div class="term-top"><dt>Assinatura de LED</dt><span class="chip tech">tecnologia</span></div><dd>A superfície do deck é eletroluminescente: cada atleta tem uma identidade visual própria, acesa durante a prova.</dd></div>
+
+        <h2 class="sec-h">Manobras e pista</h2>
+        <div class="term"><div class="term-top"><dt>Run</dt><span class="chip">prova</span></div><dd>Uma passagem completa pela pista (cerca de 45 a 60 segundos), em que o atleta encadeia manobras livremente. Vale a melhor de duas.</dd></div>
+        <div class="term"><div class="term-top"><dt>Best trick</dt><span class="chip">prova</span></div><dd>Formato em que o atleta tem algumas tentativas para executar <b>uma única manobra de alta dificuldade</b>. Cada tentativa falha não pontua.</dd></div>
+        <div class="term"><div class="term-top"><dt>Ollie</dt><span class="chip">manobra</span></div><dd>O salto fundamental do skate, base de grande parte das manobras.</dd></div>
+        <div class="term"><div class="term-top"><dt>Flip</dt><span class="chip">manobra</span></div><dd>Família de manobras em que o shape gira no ar sob os pés do atleta.</dd></div>
+        <div class="term"><div class="term-top"><dt>Grind</dt><span class="chip">manobra</span></div><dd>Deslizar sobre uma borda ou rail apoiado nos trucks do skate.</dd></div>
+        <div class="term"><div class="term-top"><dt>Grab</dt><span class="chip">manobra</span></div><dd>Segurar o shape com a mão durante um salto — dá controle no ar e conta como estilo.</dd></div>
+        <div class="term"><div class="term-top"><dt>Manual</dt><span class="chip">manobra</span></div><dd>Andar equilibrado apenas sobre duas rodas, com o resto do shape no ar.</dd></div>
+        <div class="term"><div class="term-top"><dt>Carve</dt><span class="chip">manobra</span></div><dd>Fazer curvas amplas inclinando o corpo, mantendo velocidade em vez de frear.</dd></div>
+        <div class="term"><div class="term-top"><dt>Drop</dt><span class="chip">manobra</span></div><dd>Entrar na pista descendo de uma borda ou do topo de uma rampa.</dd></div>
+        <div class="term"><div class="term-top"><dt>Rail</dt><span class="chip">pista</span></div><dd>Corrimão ou barra metálica usada para deslizes com o skate.</dd></div>
+        <div class="term"><div class="term-top"><dt>Gap</dt><span class="chip">pista</span></div><dd>Vão transposto no ar — entre plataformas, sobre uma escada ou entre trechos da pista.</dd></div>
+        <div class="term"><div class="term-top"><dt>Linha</dt><span class="chip">pista</span></div><dd>A rota que o atleta escolhe pela pista. Escolhas de linha diferentes distinguem estilos e estratégias, sobretudo na Hybrid.</dd></div>
+        <div class="term"><div class="term-top"><dt>Quarter / rampa</dt><span class="chip">pista</span></div><dd>Curvas verticais que projetam o atleta para o alto, dando altura às manobras aéreas.</dd></div>
+
+        <h2 class="sec-h">Competição</h2>
+        <div class="term"><div class="term-top"><dt>Bifurcação</dt><span class="chip comp">competição</span></div><dd>Ponto em que a pista se divide em duas rotas — geralmente uma curta e arriscada, outra longa e veloz. Nenhuma é obrigatoriamente a melhor.</dd></div>
+        <div class="term"><div class="term-top"><dt>Atalho de risco</dt><span class="chip comp">competição</span></div><dd>Rota mais curta e perigosa, conhecida por todos os atletas. Economiza tempo, mas cobra precisão — normalmente exige um salto grande e uma aterrissagem difícil.</dd></div>
+        <div class="term"><div class="term-top"><dt>Ponto de convergência</dt><span class="chip comp">competição</span></div><dd>Local onde as rotas alternativas voltam a se encontrar. É o palco natural das ultrapassagens.</dd></div>
+        <div class="term"><div class="term-top"><dt>Zona técnica</dt><span class="chip comp">competição</span></div><dd>Trecho da Hybrid com várias formas de atravessar (uma limpa e rápida, uma difícil, uma de alto risco). O atleta escolhe quanto risco compra por quanta nota.</dd></div>
+        <div class="term"><div class="term-top"><dt>Vácuo (drafting)</dt><span class="chip comp">competição</span></div><dd>Andar logo atrás de outro atleta na Race para aproveitar a esteira de ar dele e poupar energia antes de atacar.</dd></div>
+        <div class="term"><div class="term-top"><dt>Falta</dt><span class="chip comp">competição</span></div><dd>Contato proposital para derrubar um adversário — punível. Encostões acidentais entre quem desce junto são normais.</dd></div>
+        <div class="term"><div class="term-top"><dt>Bateria</dt><span class="chip comp">competição</span></div><dd>Chave eliminatória da Race: dois grupos de seis, e os três primeiros de cada avançam para a final.</dd></div>
+        <div class="term"><div class="term-top"><dt>Grid</dt><span class="chip comp">competição</span></div><dd>A ordem de largada. Na Race, é definido pelo desempenho na classificatória.</dd></div>
+        <div class="term"><div class="term-top"><dt>Etapa</dt><span class="chip comp">competição</span></div><dd>Cada uma das oito rodadas da temporada, realizada numa cidade diferente. As regras não mudam; a pista, sim.</dd></div>
+        <div class="term"><div class="term-top"><dt>Open Circuit</dt><span class="chip comp">competição</span></div><dd>O classificatório oficial e aberto da liga, disputado na pré-temporada. Dá acesso às seletivas dos times.</dd></div>
+        <div class="term"><div class="term-top"><dt>Seletiva</dt><span class="chip comp">competição</span></div><dd>A janela em que os times testam e recrutam atletas para fechar seus elencos antes da temporada.</dd></div>
+        <div class="term"><div class="term-top"><dt>Escalação</dt><span class="chip comp">competição</span></div><dd>Os atletas que o time inscreve por etapa: quatro ativos e um reserva, dois por prova.</dd></div>
+        <div class="term"><div class="term-top"><dt>Título por Equipes</dt><span class="chip comp">competição</span></div><dd>O troféu principal da temporada, somando os pontos de todo o elenco. É o que decide o grande campeão.</dd></div>
+        <div class="term"><div class="term-top"><dt>DNF</dt><span class="chip comp">competição</span></div><dd><i>Did Not Finish.</i> O atleta não conclui a prova; não pontua na etapa.</dd></div>
+      </dl>
+      <p class="noresult" id="noresult" hidden>Nenhum termo encontrado.</p>
+    </section>
+
+    <!-- mural da torcida -->
+    <section class="comments" aria-label="Mural da torcida">
+      <p class="h">💬 mural da torcida <span class="count">· 152 comentários</span></p>
+      <div class="cmt"><span class="bub">💬</span><div><span class="u">@ pandora_nation</span> <span class="t">bem-vindos a mais uma temporada de Pandora no topo 🌹 já podem ir se acostumando</span></div></div>
+      <div class="cmt"><span class="bub">💬</span><div><span class="u">@ arcade_raiz</span> <span class="t"><span class="re">em resposta a @ pandora_nation:</span> 👾 fala isso de novo depois da etapa 3</span></div></div>
+      <div class="cmt"><span class="bub">💬</span><div><span class="u">@ betateam_real</span> <span class="t">torcida alfa surtando, torcida ômega surtando, e eu de boa, beta, só aqui pra ver skate em paz</span></div></div>
+      <div class="cmt"><span class="bub">💬</span><div><span class="u">@ carol_2008</span> <span class="t">gente quando abre a inscrição do Open?? (pra ASSISTIR, ninguém me pergunta se eu ando de skate)</span></div></div>
+      <div class="cmt"><span class="bub">💬</span><div><span class="u">@ ondaazul</span> <span class="t">🌊 esse ano o coletivo vem. anota aí e me marca em dezembro</span></div></div>
+      <div class="cmt"><span class="bub">💬</span><div><span class="u">@ alfa_meianoite</span> <span class="t">a matéria é sobre a temporada nova e a seção de comentário já virou guerra de time. previsível</span></div></div>
+      <div class="cmt"><span class="bub">💬</span><div><span class="u">@ patriciadosk8</span> <span class="t">mostrei esse portal pra minha mãe só pra provar que dá pra viver disso. ela leu e perguntou "e você vive?"</span></div></div>
+      <div class="cmt"><span class="bub">💬</span><div><span class="u">@ so_mega</span> <span class="t">temporada nova, ansiedade velha 🫠</span></div></div>
+    </section>
+  </main>
+</div>
+
+<footer class="wrap">
+  <div>Portal Oficial da S-League · Temporada 2026</div>
+  <div class="disc">Universo de <b>Manual de Sobrevivência para Ômegas</b>. Liga, times e atletas são ficção.</div>
+</footer>
+
+<script>
+  (function(){
+    var root=document.documentElement, btn=document.getElementById('tgl');
+    var order=['system','light','dark'], i=0;
+    try{ var s=localStorage.getItem('sl-theme'); if(s){ i=Math.max(0,order.indexOf(s)); } }catch(e){}
+    function apply(){
+      var m=order[i];
+      if(m==='system'){ root.removeAttribute('data-theme'); btn.textContent='tema: auto'; }
+      else{ root.setAttribute('data-theme',m); btn.textContent='tema: '+(m==='dark'?'escuro':'claro'); }
+      try{ localStorage.setItem('sl-theme',m); }catch(e){}
+    }
+    btn.addEventListener('click',function(){ i=(i+1)%order.length; apply(); });
+    apply();
+  })();
+
+  (function(){
+    var tabs=[document.getElementById('t-league'),document.getElementById('t-giria')];
+    var panels=[document.getElementById('p-league'),document.getElementById('p-giria')];
+    function sel(k){
+      tabs.forEach(function(t,j){ t.setAttribute('aria-selected', j===k?'true':'false'); });
+      panels.forEach(function(p,j){ p.hidden = j!==k; });
+      try{ localStorage.setItem('sl-tab2',k); }catch(e){}
+    }
+    tabs.forEach(function(t,j){ t.addEventListener('click',function(){ sel(j); }); });
+    var start=0; try{ var v=localStorage.getItem('sl-tab2'); if(v!==null) start=+v; }catch(e){}
+    if(location.hash==='#glossario') start=1;
+    sel(start||0);
+  })();
+
+  (function(){
+    var q=document.getElementById('q'), list=document.getElementById('list'), none=document.getElementById('noresult');
+    if(!q) return;
+    var items=[].slice.call(list.querySelectorAll('.term'));
+    q.addEventListener('input',function(){
+      var v=q.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(el){
+        var hit = !v || el.textContent.toLowerCase().indexOf(v)>-1;
+        el.hidden=!hit; if(hit) shown++;
+      });
+      [].slice.call(list.querySelectorAll('.sec-h')).forEach(function(h){
+        var n=h.nextElementSibling, any=false;
+        while(n && !n.classList.contains('sec-h')){ if(n.classList.contains('term') && !n.hidden){ any=true; break; } n=n.nextElementSibling; }
+        h.hidden = v ? !any : false;
+      });
+      none.hidden = shown>0;
+    });
+  })();
+</script>
+</body>
+</html>
